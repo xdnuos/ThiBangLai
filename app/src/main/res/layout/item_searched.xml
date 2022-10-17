@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/shape_item_law_searched"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img_thumb_searched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/left_banned"/>
+    <LinearLayout
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_name_searched"
+            android:textStyle="bold"
+            android:fontFamily="@font/rubik_bold"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biển báo P123a: Cấm rẽ trái"/>
+        <TextView
+            android:id="@+id/tv_content_searched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:text="Để báo cấm rẽ trái ở những vị trí đường giao nhau. Biển không có giá trị cấm quay đầu xe. Biển có hiệu lực cấm các..."/>
+    </LinearLayout>
+</LinearLayout>
