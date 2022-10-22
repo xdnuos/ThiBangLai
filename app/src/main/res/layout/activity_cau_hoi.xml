@@ -105,39 +105,13 @@
                 android:maxHeight="180dp"
                 android:src="@null" />
         </LinearLayout>
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listDapAn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_line"
-                android:padding="16dp"
-                android:text="A. Phần mặt đường và lề đường" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_line"
-                android:padding="16dp"
-                android:text="B. Phần đường xe chạy" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_line"
-                android:padding="16dp"
-                android:text="C. Phần đường xe cơ giới" />
-        </LinearLayout>
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/white"
+            android:layout_marginTop="20dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listCauHoi"
             android:layout_width="match_parent"
