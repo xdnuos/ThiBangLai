@@ -113,7 +113,7 @@ public class BienBaoActivity extends AppCompatActivity
         listLoaiBB.add("Biển cảnh báo");
 
         loaiBienBaoAdapter = new LoaiBienBaoAdapter(this,listLoaiBB);
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv_loaiBB.setAdapter(loaiBienBaoAdapter);
         rv_loaiBB.setLayoutManager(linearLayoutManager);
 

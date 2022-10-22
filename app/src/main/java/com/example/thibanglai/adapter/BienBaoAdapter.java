@@ -91,11 +91,6 @@ public class BienBaoAdapter extends ArrayAdapter {
             }
         notifyDataSetChanged();
     }
-//    private String xuLyChuoi(String chuoi){
-//        char[] ch = new char[100];
-//        chuoi.getChars(5,chuoi.length(),ch,0);
-//        return String.valueOf(ch);
-//    }
 
 
     public String removeAccent(String s) {

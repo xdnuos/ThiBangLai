@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thibanglai.R;
@@ -38,7 +39,7 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
     @NonNull
     @Override
     public LoaiBienBaoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_hastag,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_listbb,parent,false);
         return new LoaiBienBaoViewHolder(view);
     }
 
@@ -47,8 +48,6 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                isChangeEdtInAdapter = true;
-                rv_loaiBB.setVisibility(View.GONE);
                 String loaiBB = listLoaiBB.get(position);
                 searchView.setQuery(loaiBB,false);
             }
@@ -73,7 +72,7 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
 
         public LoaiBienBaoViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tv_hashtag);
+            textView = itemView.findViewById(R.id.tv_item_loaiBB);
             itemView.setOnClickListener(this);
         }
 
