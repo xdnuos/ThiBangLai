@@ -42,7 +42,7 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                //
+                // code
             }
         });
         holder.textView.setText(listCauHoi.get(position));
