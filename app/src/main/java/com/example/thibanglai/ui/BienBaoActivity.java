@@ -116,6 +116,5 @@ public class BienBaoActivity extends AppCompatActivity
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv_loaiBB.setAdapter(loaiBienBaoAdapter);
         rv_loaiBB.setLayoutManager(linearLayoutManager);
-
     }
 }
