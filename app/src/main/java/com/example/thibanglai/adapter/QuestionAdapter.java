@@ -26,7 +26,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     @NonNull
     @Override
     public QuestionAdapter.QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_cau_hoi,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_answer,parent,false);
         return new QuestionAdapter.QuestionViewHolder(view);
     }
 
@@ -39,7 +39,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             }
         });
         holder.textView.setText(list_answer.get(position));
-        //Set
     }
 
     @Override
@@ -58,7 +57,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tv_name_searched);
+            textView = itemView.findViewById(R.id.tv_answer);
             itemView.setOnClickListener(this);
         }
 
