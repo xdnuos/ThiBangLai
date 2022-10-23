@@ -3,19 +3,19 @@ package com.example.thibanglai.model;
 import java.io.Serializable;
 
 public class Questions implements Serializable {
-    private int id,choose,correct_answer;
+    private int maCH,correct_answer; // maCH FK
     private String question_content;
     private String image;
     private String answer1,answer2,answer3,answer4;
     private String answer_des;
     private int question_type;
-    private boolean marked,wrong;
+    private boolean marked,wrong,question_die;//question_die: câu điểm liệt
 
     public Questions() {
     }
 
-    public Questions(int id, String question_content, String image, String option1, String option2, String option3, String option4, int answer, String answer_des, int question_type) {
-        this.id = id;
+    public Questions(int maCH, String question_content, String image, String option1, String option2, String option3, String option4, int answer, String answer_des, int question_type) {
+        this.maCH = maCH;
         this.question_content = question_content;
         this.image = image;
         this.answer1 = option1;
@@ -27,7 +27,6 @@ public class Questions implements Serializable {
         this.question_type = question_type;
         this.marked = false;
         this.wrong = false;
-        this.choose= 0;
     }
 
     public String getQuestion_content() {
@@ -118,11 +117,11 @@ public class Questions implements Serializable {
         this.wrong = wrong;
     }
 
-    public int getChoose() {
-        return choose;
+    public boolean isQuestion_die() {
+        return question_die;
     }
 
-    public void setChoose(int choose) {
-        this.choose = choose;
+    public void setQuestion_die(boolean question_die) {
+        this.wrong = question_die;
     }
 }

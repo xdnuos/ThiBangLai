@@ -17,10 +17,11 @@ import com.example.thibanglai.interf.IItemClick;
 import com.example.thibanglai.model.BienBao;
 import com.example.thibanglai.other.FormattingString;
 import com.example.thibanglai.ui.DetailLawActivity;
+import com.example.thibanglai.ui.QuestionActivity;
 
 import java.util.List;
 
-public class LawSearchedAdapter extends RecyclerView.Adapter<LawSearchedAdapter.LawSearchedViewHolder> {
+public class LawSearchedAdapter extends RecyclerView.Adapter<LawSearchedAdapter.LawSearchedViewHolder>{
 
     Context context;
     List<BienBao> laws;

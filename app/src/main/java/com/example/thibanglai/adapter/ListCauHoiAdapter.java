@@ -1,9 +1,9 @@
 package com.example.thibanglai.adapter;
 
 import static com.example.thibanglai.setting.MyApplication.nameDB;
-import static com.example.thibanglai.ui.BienBaoActivity.searchView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.thibanglai.R;
 import com.example.thibanglai.database.Database;
 import com.example.thibanglai.interf.IItemClick;
+import com.example.thibanglai.ui.QuestionActivity;
+
 
 import java.util.List;
 
@@ -42,7 +44,14 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                // code
+                if (context instanceof QuestionActivity) {
+                    int cr_ans = position+1;
+                    if(cr_ans==25){
+                        ((QuestionActivity)context).change_nextButton();
+                    }
+                    ((QuestionActivity)context).current_answer = cr_ans;
+                    ((QuestionActivity)context).set_answer(cr_ans);
+                }
             }
         });
         holder.textView.setText(listCauHoi.get(position));

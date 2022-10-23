@@ -8,6 +8,7 @@
     android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:clickable="false"
             android:id="@+id/btn_list_CH"
             android:layout_width="36dp"
             android:layout_height="36dp"
