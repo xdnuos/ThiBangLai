@@ -3,14 +3,18 @@ package com.example.thibanglai.ui;
 import static com.example.thibanglai.setting.MyApplication.nameDB;
 import static com.example.thibanglai.setting.MyApplication.nameSharedPreference;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.thibanglai.R;
 import com.example.thibanglai.database.Database;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skydoves.expandablelayout.ExpandableLayout;
 
 
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     boolean is_Expand = false;
     ExpandableLayout ex;
 
+    BottomNavigationView bottomNavigationView;
     SharedPreferences sharedPreferences;
     boolean isFirstRun;
     SharedPreferences.Editor editor;
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_bien_bao);
+        setContentView(R.layout.activity_main);
 //        ex = findViewById(R.id.CT_cau_TL);
 //        ex.parentLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -40,6 +45,27 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.search:
+                        startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.home:
+                        return true;
+                    case R.id.settings:
+                        //startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
+                        //overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
     private void Khoi_tao() {
         //databaseBB = new Database(this,nameDB,null,1)
@@ -53,4 +79,5 @@ public class MainActivity extends AppCompatActivity {
             //databaseBB.FirstRun();
         }
     }
+
 }
