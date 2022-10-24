@@ -2,14 +2,14 @@ package com.example.thibanglai.model;
 
 public class Exam {
     private int maDe;//FK
-    private String time;
+    private int time;
     private int current_question,num_correct_answer;
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -37,7 +37,7 @@ public class Exam {
         this.maDe = maDe;
     }
 
-    public Exam(String time, int current_question, int num_correct_answer) {
+    public Exam(int time, int current_question, int num_correct_answer) {
         this.time = time;
         this.current_question = current_question;
         this.num_correct_answer = num_correct_answer;

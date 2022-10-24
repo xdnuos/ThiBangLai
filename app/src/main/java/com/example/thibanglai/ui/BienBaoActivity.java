@@ -19,9 +19,11 @@ import com.example.thibanglai.adapter.BienBaoAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.thibanglai.adapter.LoaiBienBaoAdapter;
+import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.database.Database;
 import com.example.thibanglai.model.BienBao;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class BienBaoActivity extends AppCompatActivity
     BienBao bienBao = null;
     ListView lv_bien_bao;
 
-    Database databaseBB;
+    DataBaseHelper databaseBB;
     SharedPreferences sharedPreferences;
     boolean isFirstRun;
     SharedPreferences.Editor editor;
@@ -50,19 +52,24 @@ public class BienBaoActivity extends AppCompatActivity
         setContentView(R.layout.layout_bien_bao);
         setControl();
         setListLoaiBB();
-        Khoi_tao();
+        try {
+            Khoi_tao();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setEvent();
     }
 
-    private void Khoi_tao() {
-        databaseBB = new Database(this,nameDB,null,1);
+    private void Khoi_tao() throws IOException {
+        databaseBB = new DataBaseHelper(this);
+        //databaseBB.getWritableDatabase();
         sharedPreferences = getSharedPreferences(nameSharedPreference,MODE_PRIVATE);
         isFirstRun = sharedPreferences.getBoolean("isFirstRun",true);
         if(isFirstRun){
             editor = sharedPreferences.edit();
             editor.putBoolean("isFirstRun",false);
             editor.apply();
-            databaseBB.FirstRun();
+            databaseBB.createDatabase();
         }
     }
 
@@ -72,6 +79,7 @@ public class BienBaoActivity extends AppCompatActivity
     }
     private void setEvent() {
         //databaseBB = new Database(this,nameDB,null,1);
+        databaseBB.openDatabase();
         data.clear();
         data.addAll(databaseBB.ReadBienBao());
         adapter = new BienBaoAdapter(this,R.layout.item_bien_bao,data);

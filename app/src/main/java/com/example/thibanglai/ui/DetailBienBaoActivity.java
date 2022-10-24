@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.thibanglai.R;
 import com.example.thibanglai.adapter.BienBaoAdapter;
+import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.database.Database;
 import com.example.thibanglai.model.BienBao;
 
@@ -30,7 +31,7 @@ public class DetailBienBaoActivity extends AppCompatActivity {
     ArrayList<BienBao> data = new ArrayList<>();
     BienBaoAdapter adapter;
 
-    Database databaseBB;
+    DataBaseHelper databaseBB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class DetailBienBaoActivity extends AppCompatActivity {
     }
 
     private void List_bien_bao() {
-        databaseBB = new Database(this,nameDB,null,1);
+        databaseBB = new DataBaseHelper(this);
         data.clear();
         data.addAll(databaseBB.ReadBienBao());
         adapter = new BienBaoAdapter(this,R.layout.item_bien_bao,data);

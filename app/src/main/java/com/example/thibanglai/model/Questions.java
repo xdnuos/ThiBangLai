@@ -3,30 +3,38 @@ package com.example.thibanglai.model;
 import java.io.Serializable;
 
 public class Questions implements Serializable {
-    private int maCH,correct_answer; // maCH FK
     private String question_content;
     private String image;
     private String answer1,answer2,answer3,answer4;
+    private int correct_answer;
     private String answer_des;
-    private int question_type;
     private boolean marked,wrong,question_die;//question_die: câu điểm liệt
+    private int choose; // maCH FK
 
     public Questions() {
     }
 
-    public Questions(int maCH, String question_content, String image, String option1, String option2, String option3, String option4, int answer, String answer_des, int question_type) {
-        this.maCH = maCH;
+    public int getChoose() {
+        return choose;
+    }
+
+    public void setChoose(int choose) {
+        this.choose = choose;
+    }
+
+    public Questions(String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose) {
         this.question_content = question_content;
         this.image = image;
-        this.answer1 = option1;
-        this.answer2 = option2;
-        this.answer3 = option3;
-        this.answer4 = option4;
-        this.correct_answer = answer;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
+        this.correct_answer = correct_answer;
         this.answer_des = answer_des;
-        this.question_type = question_type;
-        this.marked = false;
-        this.wrong = false;
+        this.marked = marked;
+        this.wrong = wrong;
+        this.question_die = question_die;
+        this.choose = choose;
     }
 
     public String getQuestion_content() {
@@ -45,60 +53,12 @@ public class Questions implements Serializable {
         this.image = image;
     }
 
-    public String getOption1() {
-        return answer1;
-    }
-
-    public void setOption1(String option1) {
-        this.answer1 = option1;
-    }
-
-    public String getOption2() {
-        return answer2;
-    }
-
-    public void setOption2(String option2) {
-        this.answer2 = option2;
-    }
-
-    public String getOption3() {
-        return answer3;
-    }
-
-    public void setOption3(String option3) {
-        this.answer3 = option3;
-    }
-
-    public String getOption4() {
-        return answer4;
-    }
-
-    public void setOption4(String option4) {
-        this.answer4 = option4;
-    }
-
-    public int getAnswer() {
-        return correct_answer;
-    }
-
-    public void setAnswer(int answer) {
-        this.correct_answer = answer;
-    }
-
     public String getAnswer_des() {
         return answer_des;
     }
 
     public void setAnswer_des(String answer_des) {
         this.answer_des = answer_des;
-    }
-
-    public int getQuestion_type() {
-        return question_type;
-    }
-
-    public void setQuestion_type(int question_type) {
-        this.question_type = question_type;
     }
 
     public boolean isMarked() {
@@ -123,5 +83,45 @@ public class Questions implements Serializable {
 
     public void setQuestion_die(boolean question_die) {
         this.wrong = question_die;
+    }
+
+    public int getCorrect_answer() {
+        return correct_answer;
+    }
+
+    public void setCorrect_answer(int correct_answer) {
+        this.correct_answer = correct_answer;
+    }
+
+    public String getAnswer1() {
+        return answer1;
+    }
+
+    public void setAnswer1(String answer1) {
+        this.answer1 = answer1;
+    }
+
+    public String getAnswer2() {
+        return answer2;
+    }
+
+    public void setAnswer2(String answer2) {
+        this.answer2 = answer2;
+    }
+
+    public String getAnswer3() {
+        return answer3;
+    }
+
+    public void setAnswer3(String answer3) {
+        this.answer3 = answer3;
+    }
+
+    public String getAnswer4() {
+        return answer4;
+    }
+
+    public void setAnswer4(String answer4) {
+        this.answer4 = answer4;
     }
 }

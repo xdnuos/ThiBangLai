@@ -26,7 +26,7 @@ public class BienBaoAdapter extends ArrayAdapter {
     Context context;
     int resource;
     ArrayList<BienBao> arrBienBao;
-    ArrayList<BienBao> data_filter = new ArrayList<>();
+    ArrayList<BienBao> data_filter = new ArrayList<BienBao>();
     FormattingString getTenItem = new FormattingString();
 
     public BienBaoAdapter(@NonNull Context context, int resource, @NonNull ArrayList<BienBao> arrBienBao) {
@@ -54,7 +54,7 @@ public class BienBaoAdapter extends ArrayAdapter {
         final BienBao item=arrBienBao.get(position);
         Resources resources = context.getResources();
         holder.tvTenItem.setText(getTenItem(item.getMaBienBao(), item.getLoaiBienBao(), item.getTenBienBao()));
-        holder.tvNoiDung.setText(convert_long_text(item.getNoiDung()));
+        holder.tvNoiDung.setText(item.getNoiDung());
         holder.ivHinhAnh.setImageResource(resources.getIdentifier(item.getThumb(),"drawable",context.getPackageName()));
         return convertView;
     }
@@ -65,16 +65,6 @@ public class BienBaoAdapter extends ArrayAdapter {
     }
     public String getTenItem(String maBienBao, String loaiBienBao, String tenBienBao ) {
         return context.getResources().getString(R.string.item_bien_bao,loaiBienBao,maBienBao,tenBienBao);
-    }
-    public String convert_long_text(String long_text){
-        int length = long_text.length();
-        if (length>=100){
-            char[] ch = new char[125];
-            long_text.getChars(0,110,ch,0);
-            return String.valueOf(ch) + " ...";
-        } else {
-            return long_text;
-        }
     }
 
     public void filter(String key){
