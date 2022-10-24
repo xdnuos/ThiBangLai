@@ -40,8 +40,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(context, "?", Toast.LENGTH_SHORT).show();
-                //code
+
             }
         });
         holder.textView.setText(list_answer.get(position));
@@ -73,11 +72,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         }
     }
     public void setMarked(){
-        SQLiteDatabase database = getWritableDatabase();
-        String sql="INSERT INTO bienBao VALUES(1,'P123a','Cấm rẽ trái','Để báo cấm rẽ trái ở những vị trí đường giao nhau Để báo cấm rẽ trái. ở những vị trí đường giao nhau Để báo cấm rẽ trái ở những vị trí đường giao nhau. Để báo cấm rẽ trái ở những vị trí đường giao nhau','left_banned','#Rẽ trái')";
-        String sql2="INSERT INTO bienBao VALUES(2,'P123b','Biển hiệu lệnh','Để báo cấm rẽ trái ở những vị trí đường giao nhau Để báo cấm rẽ trái. ở những vị trí đường giao nhau Để báo cấm rẽ trái ở những vị trí đường giao nhau. Để báo cấm rẽ trái ở những vị trí đường giao nhau','left_banned','#Rẽ trái')";
-        database.execSQL(sql);
-        database.execSQL(sql2);
+
 
     }
 

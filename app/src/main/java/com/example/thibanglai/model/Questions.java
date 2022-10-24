@@ -3,6 +3,7 @@ package com.example.thibanglai.model;
 import java.io.Serializable;
 
 public class Questions implements Serializable {
+    private int question_id;
     private String question_content;
     private String image;
     private String answer1,answer2,answer3,answer4;
@@ -22,7 +23,7 @@ public class Questions implements Serializable {
         this.choose = choose;
     }
 
-    public Questions(String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose) {
+    public Questions(int question_id,String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose) {
         this.question_content = question_content;
         this.image = image;
         this.answer1 = answer1;
@@ -35,6 +36,15 @@ public class Questions implements Serializable {
         this.wrong = wrong;
         this.question_die = question_die;
         this.choose = choose;
+        this.question_id = question_id;
+    }
+
+    public int getQuestion_id() {
+        return question_id;
+    }
+
+    public void setQuestion_id(int question_id) {
+        this.question_id = question_id;
     }
 
     public String getQuestion_content() {

@@ -51,6 +51,7 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
                     }
                     ((QuestionActivity)context).current_answer = cr_ans;
                     ((QuestionActivity)context).set_answer(cr_ans);
+                    ((QuestionActivity)context).status_btnsave();
                 }
             }
         });

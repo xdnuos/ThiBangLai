@@ -143,6 +143,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(query,null);
     }
+    public void setMarked(int question_id,boolean marked_stt){
+        int stt = marked_stt ? 1 : 0;
+        SQLiteDatabase database = getWritableDatabase();
+        String sql="UPDATE Question SET marked = '%"+stt+"%'"+" WHERE id= '%"+question_id+"%'";
+        database.execSQL(sql);
+    }
 }
 //delete database
 

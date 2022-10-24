@@ -25,10 +25,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -55,6 +57,8 @@ public class QuestionActivity extends AppCompatActivity{
     Cursor cursor;
     ArrayList<Questions> listQuestion = new ArrayList<>();
 
+    TextView tv_cau_hoi,tv_ten_cau_hoi,tv_time;
+    CountDownTimer Timer;
     //code
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +70,22 @@ public class QuestionActivity extends AppCompatActivity{
         set_answer(current_answer);
         set_listCH();
         setEvent();
+        count_down();
     }
 
     private void setEvent() {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (btn_save.isChecked()){
+                int id = listQuestion.get(current_answer-1).getQuestion_id();
+                if (btn_save.isChecked() & !listQuestion.get(current_answer-1).isMarked()){
                     btn_save.setChecked(true);
+                    setMarked(id,true);
                     listQuestion.get(current_answer-1).setMarked(true);
                 } else {
                     btn_save.setChecked(false);
-                    listQuestion.get(current_answer-1).setMarked(true);
+                    setMarked(id,false);
+                    listQuestion.get(current_answer-1).setMarked(false);
                 }
             }
         });
@@ -109,7 +117,11 @@ public class QuestionActivity extends AppCompatActivity{
     public void change_nextButton(){
         btn_next.setText("Nộp bài");
     }
-
+    public void status_btnsave(){
+        if (listQuestion.get(current_answer-1).isMarked()){
+            btn_save.setChecked(true);
+        } else btn_save.setChecked(false);
+    }
     public void submit() {
 //        ArrayList ketqua = new ArrayList<>();
 //        ketqua.add(15); //correct answer
@@ -128,8 +140,9 @@ public class QuestionActivity extends AppCompatActivity{
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
     }
-    private void setMarked(){
-
+    private void setMarked(int question_id,boolean marked_stt){
+        //setMarked(int question_id,boolean marked_stt)
+        database.setMarked(question_id,marked_stt);
     }
     private void save_status() {
         //save câu đang làm
@@ -157,6 +170,9 @@ public class QuestionActivity extends AppCompatActivity{
         btn_save = findViewById(R.id.btn_save);
         btn_yes = findViewById(R.id.btn_yes);
         btn_no = findViewById(R.id.btn_no);
+        tv_cau_hoi = findViewById(R.id.tv_cau_hoi);
+        tv_ten_cau_hoi = findViewById(R.id.tv_ten_cau_hoi);
+        tv_time = findViewById(R.id.tv_time);
     }
 
     private void set_listCH(){
@@ -176,11 +192,14 @@ public class QuestionActivity extends AppCompatActivity{
         cursor = database.getData("SELECT * FROM Question as qs JOIN links as lk ON qs.id = lk.maCH WHERE lk.maDe = 1");
         while (cursor.moveToNext()){
             //Questions(String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose)
-            listQuestion.add(new Questions(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
+            listQuestion.add(new Questions(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
                     cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getInt(10) == 1,cursor.getInt(11)==1,cursor.getInt(12)==1,0));
         }
     }
     public void set_answer(int question_index){
+        tv_ten_cau_hoi.setText("Câu "+String.valueOf(question_index));
+        tv_cau_hoi.setText(listQuestion.get(question_index-1).getQuestion_content());
+        //
         String a,b,c,d;
         a = listQuestion.get(question_index-1).getAnswer1();
         b = listQuestion.get(question_index-1).getAnswer2();
@@ -196,11 +215,42 @@ public class QuestionActivity extends AppCompatActivity{
         if (d!=null){
             listDA.add(d);
         }
-
         rv_listDA = findViewById(R.id.listDapAn);
         listDA_adapter = new QuestionAdapter(this,listDA);
         linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rv_listDA.setAdapter(listDA_adapter);
         rv_listDA.setLayoutManager(linearLayoutManager);
+    }
+    public String convert_time(long millisUntilFinished){
+        long minutes = (millisUntilFinished / 1000) / 60;
+        long seconds = (millisUntilFinished / 1000) % 60;
+        return String.valueOf(minutes)+":"+String.valueOf(seconds);
+    }
+    private void count_down(){
+        Timer = new CountDownTimer(1140*1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tv_time.setText(convert_time(millisUntilFinished));
+            }
+            @Override
+            public void onFinish() {
+                tv_time.setText("Hết giờ");
+            }
+        }.start();
+    }
+    public void save_dap_an(int index){
+        switch (index){
+            case (0):
+
+                break;
+            case (1):
+                break;
+            case (2):
+                break;
+            case (3):
+                break;
+            default:
+                break;
+        }
     }
 }
