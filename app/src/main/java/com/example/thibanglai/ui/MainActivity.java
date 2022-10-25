@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.thibanglai.R;
@@ -25,11 +26,45 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     boolean isFirstRun;
     SharedPreferences.Editor editor;
+    Button btn_lam_de,btn_cau_sai,btn_bien_bao,btn_cau_save,btn_tips,btn_tra_cuu_luat;
 
+    private void setControl() {
+        btn_lam_de = findViewById(R.id.btn_lamde);
+        btn_cau_sai = findViewById(R.id.btn_cau_sai);
+        btn_bien_bao = findViewById(R.id.btn_bien_bao);
+        btn_cau_save = findViewById(R.id.btn_cau_save);
+        btn_tips = findViewById(R.id.btn_tips);
+        btn_tra_cuu_luat = findViewById(R.id.btn_tra_cuu_luat);
+    }
+    private void setEvent() {
+        btn_bien_bao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BienBaoActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_tra_cuu_luat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ResearchLawActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TipActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setControl();
+        setEvent();
 //        ex = findViewById(R.id.CT_cau_TL);
 //        ex.parentLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -65,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     private void Khoi_tao() {
         //databaseBB = new Database(this,nameDB,null,1)
         sharedPreferences = getSharedPreferences(nameSharedPreference,MODE_PRIVATE);

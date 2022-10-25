@@ -37,6 +37,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.BienBaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ResearchLawActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,7 @@ public class BienBaoActivity extends AppCompatActivity
     public static RecyclerView rv_loaiBB;
     public static SearchView searchView;
     BottomNavigationView bottomNavigationView;
+    ImageButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class BienBaoActivity extends AppCompatActivity
     private void setControl() {
         lv_bien_bao = findViewById(R.id.lv_bien_bao);
         searchView = findViewById(R.id.searchView_BB);
+        btn_back = findViewById(R.id.btn_back);
     }
     private void setEvent() {
         //databaseBB = new Database(this,nameDB,null,1);
@@ -115,6 +118,13 @@ public class BienBaoActivity extends AppCompatActivity
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("value",item);
                 intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

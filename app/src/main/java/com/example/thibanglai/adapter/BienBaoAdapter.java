@@ -32,6 +32,7 @@ public class BienBaoAdapter extends ArrayAdapter {
     ArrayList<BienBao> data_filter = new ArrayList<BienBao>();
     FormattingString getTenItem = new FormattingString();
 
+
     public BienBaoAdapter(@NonNull Context context, int resource, @NonNull ArrayList<BienBao> arrBienBao) {
         super(context, resource,arrBienBao);
         this.context=context;
