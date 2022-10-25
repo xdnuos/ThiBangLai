@@ -27,7 +27,16 @@
             android:name=".ui.TimKiemActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.QuestionActivity"
+            android:name=".ui.LawDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ListLawActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.TipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BienBaoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

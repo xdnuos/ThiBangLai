@@ -1,26 +1,19 @@
 package com.example.thibanglai.adapter;
 
-import static com.example.thibanglai.setting.MyApplication.isChangeEdtInAdapter;
-import static com.example.thibanglai.setting.MyApplication.nameDB;
-
-import static com.example.thibanglai.ui.BienBaoActivity.rv_loaiBB;
 import static com.example.thibanglai.ui.BienBaoActivity.searchView;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thibanglai.R;
-import com.example.thibanglai.database.Database;
+import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.interf.IItemClick;
-import com.example.thibanglai.model.BienBao;
 
 import java.util.List;
 
@@ -28,12 +21,12 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
 
     Context context;
     List<String> listLoaiBB;
-    Database database;
+    DataBaseHelper database;
 
     public LoaiBienBaoAdapter(Context context, List<String> listLoaiBB) {
         this.context = context;
         this.listLoaiBB = listLoaiBB;
-        database = new Database(context,nameDB,null,1);
+        database = new DataBaseHelper(context);
     }
 
     @NonNull

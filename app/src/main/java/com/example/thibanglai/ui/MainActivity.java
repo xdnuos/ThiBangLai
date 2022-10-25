@@ -1,6 +1,5 @@
 package com.example.thibanglai.ui;
 
-import static com.example.thibanglai.setting.MyApplication.nameDB;
 import static com.example.thibanglai.setting.MyApplication.nameSharedPreference;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.thibanglai.R;
-import com.example.thibanglai.database.Database;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.skydoves.expandablelayout.ExpandableLayout;
 

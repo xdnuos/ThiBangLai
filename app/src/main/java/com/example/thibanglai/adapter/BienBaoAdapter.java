@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import com.example.thibanglai.model.BienBao;
 import com.example.thibanglai.R;
 import com.example.thibanglai.other.FormattingString;
+import com.example.thibanglai.ui.TimKiemActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.Normalizer;
 import java.util.Locale;
@@ -89,5 +92,6 @@ public class BienBaoAdapter extends ArrayAdapter {
             Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
             return pattern.matcher(temp).replaceAll("");
     }
+
 
 }

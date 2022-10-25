@@ -1,7 +1,6 @@
 package com.example.thibanglai.ui;
 
-import static com.example.thibanglai.setting.MyApplication.nameDB;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,22 +10,18 @@ import com.example.thibanglai.R;
 import com.example.thibanglai.adapter.ListCauHoiAdapter;
 import com.example.thibanglai.adapter.QuestionAdapter;
 import com.example.thibanglai.database.DataBaseHelper;
-import com.example.thibanglai.database.Database;
 import com.example.thibanglai.dialog.Submit_dialog;
-import com.example.thibanglai.model.BienBao;
-import com.example.thibanglai.model.DA;
 import com.example.thibanglai.model.Questions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
 import android.content.Intent;
-import android.database.AbstractCursor;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -60,6 +55,7 @@ public class QuestionActivity extends AppCompatActivity{
     TextView tv_cau_hoi,tv_ten_cau_hoi,tv_time;
     CountDownTimer Timer;
 
+
     RecyclerView recyclerView;
     //code
     @Override
@@ -74,6 +70,7 @@ public class QuestionActivity extends AppCompatActivity{
         setEvent();
         count_down();
         status_btnsave();
+
     }
 
     private void setEvent() {

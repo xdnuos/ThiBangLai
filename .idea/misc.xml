@@ -34,8 +34,12 @@
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_custom_adapter.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_detail_bien_bao.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_detail_law.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_law_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_list_law.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_question.xml" value="0.25" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_research_law.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/activity_tip.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/cau_hoi.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/cau_hoi_parent.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/cau_hoi_second.xml" value="0.365625" />
@@ -58,7 +62,13 @@
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/ket_qua.xml" value="0.365625" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_bien_bao.xml" value="0.33" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_content_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_content_law_detail.xml" value="0.2930253623188406" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_content_list_law.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_content_research_law.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_content_tip.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_detail_bien_bao.xml" value="0.18" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_item_grid.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_item_law.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_ket_qua.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/golos/Desktop/android/ThiBangLai/app/src/main/res/layout/layout_main_tim_kiem.xml" value="0.17083333333333334" />

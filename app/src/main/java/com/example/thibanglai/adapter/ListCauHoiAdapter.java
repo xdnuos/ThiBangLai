@@ -1,9 +1,6 @@
 package com.example.thibanglai.adapter;
 
-import static com.example.thibanglai.setting.MyApplication.nameDB;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thibanglai.R;
-import com.example.thibanglai.database.Database;
+import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.interf.IItemClick;
 import com.example.thibanglai.ui.QuestionActivity;
 
@@ -24,12 +21,12 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
 
     Context context;
     List<String> listCauHoi;
-    Database database;
+    DataBaseHelper database;
 
     public ListCauHoiAdapter(Context context, List<String> listCauHoi) {
         this.context = context;
         this.listCauHoi = listCauHoi;
-        database = new Database(context,nameDB,null,1);
+        database = new DataBaseHelper(context);
     }
 
     @NonNull

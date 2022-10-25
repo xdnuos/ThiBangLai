@@ -1,42 +1,32 @@
 package com.example.thibanglai.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thibanglai.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
-public class DetailLawActivity extends AppCompatActivity {
-
-    ImageView imgBack;
-    TabLayout tabLayout;
+public class LawDetailActivity extends AppCompatActivity {
+    ImageView btn_back;
     BottomNavigationView bottomNavigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_law);
-        tabLayout = findViewById(R.id.tabLayout2);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_search_tab);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_setting);
-        imgBack = findViewById(R.id.img_back_detail_law);
-        imgBack.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_law_detail);
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(DetailLawActivity.this,TimKiemActivity.class);
-//                startActivity(intent);
                 finish();
             }
         });
-
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,10 +34,12 @@ public class DetailLawActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(), TimKiemActivity.class));
+                        startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.settings:
                         //startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
@@ -58,4 +50,6 @@ public class DetailLawActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
