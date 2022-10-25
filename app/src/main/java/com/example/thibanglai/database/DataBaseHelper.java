@@ -146,9 +146,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void setMarked(int question_id,boolean marked_stt){
         int stt = marked_stt ? 1 : 0;
         SQLiteDatabase database = getWritableDatabase();
-        String sql="UPDATE Question SET marked = '%"+stt+"%'"+" WHERE id= '%"+question_id+"%'";
+        String sql="UPDATE Question SET marked = "+stt+" WHERE id= "+question_id;
+        database.execSQL(sql);
+        database.close();
+    }
+    public int getMarked(int question_id){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql="SELECT marked FROM Question WHERE id= '%"+question_id+"%'";
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do {
+                return cursor.getInt(0);
+            }while (cursor.moveToNext());
+        } else return 0;
+    }
+    public void setChoose(int question_id,int choose,int maDe){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql="UPDATE links SET choose = "+choose+" WHERE maCH= "+question_id+" AND maDe= "+maDe;
         database.execSQL(sql);
     }
+    public int getChoose(int question_id,int maDe){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql="SELECT choose FROM links WHERE maCH= "+question_id+" AND maDe= "+maDe;
+        Cursor cursor = database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do {
+                return cursor.getInt(0);
+            }while (cursor.moveToNext());
+        } else return 0;
+    }
 }
-//delete database
 

@@ -59,6 +59,8 @@ public class QuestionActivity extends AppCompatActivity{
 
     TextView tv_cau_hoi,tv_ten_cau_hoi,tv_time;
     CountDownTimer Timer;
+
+    RecyclerView recyclerView;
     //code
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +68,12 @@ public class QuestionActivity extends AppCompatActivity{
         setContentView(R.layout.activity_question);
         database = new DataBaseHelper(this);
         setControl();
-        getListQuestion();
+        getListQuestion(1);
         set_answer(current_answer);
         set_listCH();
         setEvent();
         count_down();
+        status_btnsave();
     }
 
     private void setEvent() {
@@ -82,6 +85,7 @@ public class QuestionActivity extends AppCompatActivity{
                     btn_save.setChecked(true);
                     setMarked(id,true);
                     listQuestion.get(current_answer-1).setMarked(true);
+                    Toast.makeText(QuestionActivity.this, String.valueOf(database.getMarked(id)), Toast.LENGTH_SHORT).show();
                 } else {
                     btn_save.setChecked(false);
                     setMarked(id,false);
@@ -93,8 +97,9 @@ public class QuestionActivity extends AppCompatActivity{
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save_status();
-                finish();
+                //finish();
+                int i = listQuestion.get(current_answer-1).getChoose();
+                Toast.makeText(QuestionActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -123,16 +128,30 @@ public class QuestionActivity extends AppCompatActivity{
         } else btn_save.setChecked(false);
     }
     public void submit() {
-//        ArrayList ketqua = new ArrayList<>();
-//        ketqua.add(15); //correct answer
-//        ketqua.add(150); //time
-//        ketqua.add(0);//question_dead
-//        Intent intent = new Intent(getApplicationContext(), DetailBienBaoActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putIntegerArrayList("value",ketqua);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-        Toast.makeText(this, "Đã nộp bài", Toast.LENGTH_SHORT).show();
+
+        int cau_dung=0;
+        int cau_sai=0;
+        int cau_chua_lam=0;
+        //int question_dead=0;
+        for (int i = 0; i < listQuestion.size(); i++) {
+            int choose = listQuestion.get(i).getChoose();
+            if (choose==0){
+                cau_chua_lam+=1;
+            }
+            if (listQuestion.get(i).getChoose()==listQuestion.get(i).getCorrect_answer()){
+                cau_dung+=1;
+            }else cau_sai+=1;
+        }
+
+        Intent intent = new Intent(getApplicationContext(), KetQuaActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("time",String.valueOf(tv_time.getText()));
+        bundle.putInt("cau_dung", cau_dung);
+        bundle.putInt("cau_sai", cau_sai);
+        bundle.putInt("cau_chua_lam", cau_chua_lam);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        //Toast.makeText(this, "Đã nộp bài", Toast.LENGTH_SHORT).show();
     }
 
     private void submitDialog() {
@@ -144,24 +163,11 @@ public class QuestionActivity extends AppCompatActivity{
         //setMarked(int question_id,boolean marked_stt)
         database.setMarked(question_id,marked_stt);
     }
-    private void save_status() {
-        //save câu đang làm
-        //save time
-        //save lựa chọn của từng câu hỏi
-        // nếu xong thì save_result();
-    }
-    private void save_result(){
-        //save câu đúng và sai
-    }
 
     private void nextQuestion() {
-        listDA.clear();
-        // lấy question từ db ra
-        //get index
-        set_answer(1);
-    }
-    private void get_answer(){
-        // get đáp án đã chọn, chưa chọn thì bỏ trống
+        //done
+        current_answer+=1;
+        set_answer(current_answer);
     }
     private void setControl() {
         btn_back = findViewById(R.id.btnBack);
@@ -173,6 +179,7 @@ public class QuestionActivity extends AppCompatActivity{
         tv_cau_hoi = findViewById(R.id.tv_cau_hoi);
         tv_ten_cau_hoi = findViewById(R.id.tv_ten_cau_hoi);
         tv_time = findViewById(R.id.tv_time);
+        recyclerView = findViewById(R.id.listDapAn);
     }
 
     private void set_listCH(){
@@ -188,12 +195,12 @@ public class QuestionActivity extends AppCompatActivity{
         rv_listCH.setAdapter(listCauHoiAdapter);
         rv_listCH.setLayoutManager(mGridLayoutManager);
     }
-    private void getListQuestion(){
+    private void getListQuestion(int maDe){
         cursor = database.getData("SELECT * FROM Question as qs JOIN links as lk ON qs.id = lk.maCH WHERE lk.maDe = 1");
         while (cursor.moveToNext()){
-            //Questions(String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose)
+            //Questions(int question_id,String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose,int maDe)
             listQuestion.add(new Questions(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
-                    cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getInt(10) == 1,cursor.getInt(11)==1,cursor.getInt(12)==1,0));
+                    cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getInt(10) == 1,cursor.getInt(11)==1,cursor.getInt(12)==1,cursor.getInt(16)));
         }
     }
     public void set_answer(int question_index){
@@ -238,19 +245,15 @@ public class QuestionActivity extends AppCompatActivity{
             }
         }.start();
     }
-    public void save_dap_an(int index){
-        switch (index){
-            case (0):
-
-                break;
-            case (1):
-                break;
-            case (2):
-                break;
-            case (3):
-                break;
-            default:
-                break;
-        }
+    public int getchoose(){
+        int maDe = 1;
+        int question_id = listQuestion.get(current_answer-1).getQuestion_id();
+        return database.getChoose(question_id,maDe);
+    }
+    public void setchoose(int choose){
+        int maDe = 1;
+        int question_id = listQuestion.get(current_answer-1).getQuestion_id();
+        listQuestion.get(current_answer-1).setChoose(choose);
+        database.setChoose(question_id,choose,maDe);
     }
 }

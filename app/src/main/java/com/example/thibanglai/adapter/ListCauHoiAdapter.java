@@ -53,6 +53,7 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
                     ((QuestionActivity)context).set_answer(cr_ans);
                     ((QuestionActivity)context).status_btnsave();
                 }
+
             }
         });
         holder.textView.setText(listCauHoi.get(position));

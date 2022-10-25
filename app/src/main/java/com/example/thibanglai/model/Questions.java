@@ -11,6 +11,7 @@ public class Questions implements Serializable {
     private String answer_des;
     private boolean marked,wrong,question_die;//question_die: câu điểm liệt
     private int choose; // maCH FK
+    private int maDe;
 
     public Questions() {
     }
@@ -37,6 +38,14 @@ public class Questions implements Serializable {
         this.question_die = question_die;
         this.choose = choose;
         this.question_id = question_id;
+    }
+
+    public int getMaDe() {
+        return maDe;
+    }
+
+    public void setMaDe(int maDe) {
+        this.maDe = maDe;
     }
 
     public int getQuestion_id() {

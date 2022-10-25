@@ -18,6 +18,9 @@
             android:name=".ui.DetailBienBaoActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.KetQuaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.DetailLawActivity"
             android:exported="false" />
         <activity
