@@ -1,1 +1,1 @@
-fuking android app
+fucking android app
