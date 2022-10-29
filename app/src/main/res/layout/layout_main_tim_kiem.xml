@@ -9,16 +9,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imageView"
-            app:srcCompat="@drawable/ic_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            />
-
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_so_cau_da_lam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"

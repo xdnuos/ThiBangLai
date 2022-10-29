@@ -18,10 +18,37 @@
             android:name=".ui.DetailBienBaoActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.KetQuaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.DetailLawActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.TimKiemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LawDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ListLawActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.TipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BienBaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ResearchLawActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.QuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

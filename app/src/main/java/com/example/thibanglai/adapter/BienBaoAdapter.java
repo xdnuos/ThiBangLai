@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import com.example.thibanglai.model.BienBao;
 import com.example.thibanglai.R;
 import com.example.thibanglai.other.FormattingString;
-
+import java.io.IOException;
+import java.io.InputStream;
+import android.graphics.drawable.Drawable;
 import java.text.Normalizer;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -26,8 +29,9 @@ public class BienBaoAdapter extends ArrayAdapter {
     Context context;
     int resource;
     ArrayList<BienBao> arrBienBao;
-    ArrayList<BienBao> data_filter = new ArrayList<>();
+    ArrayList<BienBao> data_filter = new ArrayList<BienBao>();
     FormattingString getTenItem = new FormattingString();
+
 
     public BienBaoAdapter(@NonNull Context context, int resource, @NonNull ArrayList<BienBao> arrBienBao) {
         super(context, resource,arrBienBao);
@@ -53,28 +57,16 @@ public class BienBaoAdapter extends ArrayAdapter {
             holder=(ViewHolder) convertView.getTag();
         final BienBao item=arrBienBao.get(position);
         Resources resources = context.getResources();
-        holder.tvTenItem.setText(getTenItem(item.getMaBienBao(), item.getLoaiBienBao(), item.getTenBienBao()));
-        holder.tvNoiDung.setText(convert_long_text(item.getNoiDung()));
+        holder.tvTenItem.setText(getTenItem.getTenItem(context,item.getMaBienBao(), item.getLoaiBienBao(), item.getTenBienBao()));
+        holder.tvNoiDung.setText(item.getNoiDung());
         holder.ivHinhAnh.setImageResource(resources.getIdentifier(item.getThumb(),"drawable",context.getPackageName()));
         return convertView;
     }
+
     public class ViewHolder{
         TextView tvTenItem;
         TextView tvNoiDung;
         ImageView ivHinhAnh;
-    }
-    public String getTenItem(String maBienBao, String loaiBienBao, String tenBienBao ) {
-        return context.getResources().getString(R.string.item_bien_bao,loaiBienBao,maBienBao,tenBienBao);
-    }
-    public String convert_long_text(String long_text){
-        int length = long_text.length();
-        if (length>=100){
-            char[] ch = new char[125];
-            long_text.getChars(0,110,ch,0);
-            return String.valueOf(ch) + " ...";
-        } else {
-            return long_text;
-        }
     }
 
     public void filter(String key){
@@ -99,5 +91,6 @@ public class BienBaoAdapter extends ArrayAdapter {
             Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
             return pattern.matcher(temp).replaceAll("");
     }
+
 
 }

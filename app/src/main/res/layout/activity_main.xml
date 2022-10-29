@@ -73,6 +73,7 @@
                     android:textAllCaps="false" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_cau_sai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -93,6 +94,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_bien_bao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -107,6 +109,7 @@
                     android:textAllCaps="false" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_cau_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -127,6 +130,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_tips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -141,6 +145,7 @@
                     android:textAllCaps="false" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_tra_cuu_luat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"

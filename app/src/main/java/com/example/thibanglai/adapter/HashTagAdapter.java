@@ -1,7 +1,6 @@
 package com.example.thibanglai.adapter;
 
 import static com.example.thibanglai.setting.MyApplication.isChangeEdtInAdapter;
-import static com.example.thibanglai.setting.MyApplication.nameDB;
 import static com.example.thibanglai.ui.TimKiemActivity.edtSearch;
 import static com.example.thibanglai.ui.TimKiemActivity.lawSearchedAdapter;
 import static com.example.thibanglai.ui.TimKiemActivity.BienBaoSearch;
@@ -19,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thibanglai.R;
-import com.example.thibanglai.database.Database;
+import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.interf.IItemClick;
 import com.example.thibanglai.model.BienBao;
 
@@ -29,12 +28,12 @@ public class HashTagAdapter extends RecyclerView.Adapter<HashTagAdapter.HashTagV
 
     Context context;
     List<String> listHashtag;
-    Database database;
+    DataBaseHelper database;
 
     public HashTagAdapter(Context context, List<String> listHashtag) {
         this.context = context;
         this.listHashtag = listHashtag;
-        database = new Database(context,nameDB,null,1);
+        database = new DataBaseHelper(context);
     }
 
     @NonNull
@@ -53,10 +52,10 @@ public class HashTagAdapter extends RecyclerView.Adapter<HashTagAdapter.HashTagV
                 rvHashtag.setVisibility(View.GONE);
                 String tag = listHashtag.get(position);
                 edtSearch.setText(tag);
-                Cursor cursor = database.getData("SELECT * FROM bienBao WHERE hashtag = '"+tag+"'");
+                Cursor cursor = database.getData("SELECT * FROM Signs WHERE hastag = '"+tag+"'");
                 BienBaoSearch.clear();
                 while (cursor.moveToNext()){
-                    BienBaoSearch.add(new BienBao(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5)));
+                    BienBaoSearch.add(new BienBao(cursor.getInt(5),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(6)));
                 }
                 if(lawSearchedAdapter!=null) lawSearchedAdapter.notifyDataSetChanged();
                 else {

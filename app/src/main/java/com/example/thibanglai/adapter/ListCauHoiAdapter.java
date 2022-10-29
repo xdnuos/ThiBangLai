@@ -1,8 +1,5 @@
 package com.example.thibanglai.adapter;
 
-import static com.example.thibanglai.setting.MyApplication.nameDB;
-import static com.example.thibanglai.ui.BienBaoActivity.searchView;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thibanglai.R;
-import com.example.thibanglai.database.Database;
+import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.interf.IItemClick;
+import com.example.thibanglai.ui.QuestionActivity;
+
 
 import java.util.List;
 
@@ -22,12 +21,12 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
 
     Context context;
     List<String> listCauHoi;
-    Database database;
+    DataBaseHelper database;
 
     public ListCauHoiAdapter(Context context, List<String> listCauHoi) {
         this.context = context;
         this.listCauHoi = listCauHoi;
-        database = new Database(context,nameDB,null,1);
+        database = new DataBaseHelper(context);
     }
 
     @NonNull
@@ -42,7 +41,16 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                // code
+                if (context instanceof QuestionActivity) {
+                    int cr_ans = position+1;
+                    if(cr_ans==25){
+                        ((QuestionActivity)context).change_nextButton();
+                    } else  ((QuestionActivity)context).return_nextButton();
+                    ((QuestionActivity)context).current_answer = cr_ans;
+                    ((QuestionActivity)context).set_answer(cr_ans);
+                    ((QuestionActivity)context).status_btnsave();
+                }
+
             }
         });
         holder.textView.setText(listCauHoi.get(position));
