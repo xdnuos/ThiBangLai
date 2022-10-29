@@ -21,11 +21,11 @@ public class Exam {
         this.current_question = current_question;
     }
 
-    public int getNum_correct_answer() {
+    public int getNum_answer() {
         return num_correct_answer;
     }
 
-    public void setNum_correct_answer(int num_correct_answer) {
+    public void setNum_answer(int num_correct_answer) {
         this.num_correct_answer = num_correct_answer;
     }
 
@@ -37,7 +37,8 @@ public class Exam {
         this.maDe = maDe;
     }
 
-    public Exam(int time, int current_question, int num_correct_answer) {
+    public Exam(int maDe,int time, int current_question, int num_correct_answer) {
+        this.maDe = maDe;
         this.time = time;
         this.current_question = current_question;
         this.num_correct_answer = num_correct_answer;

@@ -142,7 +142,7 @@ public class TimKiemActivity extends AppCompatActivity {
         BienBaoSearch = new ArrayList<>();
         listHashtag = new ArrayList<>();
 
-        listHashtag.add("#Lỗi vi phạm");
+        listHashtag.add("#Rẽ phải");
         listHashtag.add("#Uống rượu bia");
         listHashtag.add("#Quay đầu");
         listHashtag.add("#Rẽ trái");

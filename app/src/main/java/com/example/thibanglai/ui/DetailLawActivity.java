@@ -23,10 +23,6 @@ public class DetailLawActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_law);
-        tabLayout = findViewById(R.id.tabLayout2);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_search_tab);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_setting);
         imgBack = findViewById(R.id.img_back_detail_law);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

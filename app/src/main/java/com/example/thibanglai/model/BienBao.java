@@ -37,13 +37,19 @@ public class BienBao implements Serializable {
             return "báo cấm";
         }
         if(loaiBienBao==2){
-            return "hiệu lệnh";
+            return "báo nguy hiểm";
         }
         if(loaiBienBao==3){
-            return "chỉ dẫn";
+            return "báo hiệu lệnh";
         }
         if(loaiBienBao==4){
-            return "báo nguy hiểm";
+            return "báo chỉ dẫn";
+        }
+        if(loaiBienBao==5){
+            return "báo phụ";
+        }
+        if(loaiBienBao==6){
+            return "adfasdf";
         }
         return "";
     }

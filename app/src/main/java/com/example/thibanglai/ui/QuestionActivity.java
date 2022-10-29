@@ -19,19 +19,24 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-// CẤU TRÚC ĐỀ THI: 15 LUẬT GIAO THÔNG, 5 SA HÌNH, 5 BIỂN BÁO
+
 public class QuestionActivity extends AppCompatActivity{
     //Khai bao
     public static RecyclerView rv_listCH,rv_listDA;
@@ -42,6 +47,8 @@ public class QuestionActivity extends AppCompatActivity{
     GridLayoutManager mGridLayoutManager;
     LinearLayoutManager linearLayoutManager;
     public int current_answer =1;
+    long timeLeft;
+    int current_time = 1140*1000;
 
     ImageButton btn_back;
     MaterialButton btn_submit;
@@ -54,9 +61,11 @@ public class QuestionActivity extends AppCompatActivity{
 
     TextView tv_cau_hoi,tv_ten_cau_hoi,tv_time;
     CountDownTimer Timer;
+    ImageView iv_cauhoi;
 
 
     RecyclerView recyclerView;
+    int maDe=2;
     //code
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +73,17 @@ public class QuestionActivity extends AppCompatActivity{
         setContentView(R.layout.activity_question);
         database = new DataBaseHelper(this);
         setControl();
-        getListQuestion(1);
+
+        Intent intent = getIntent();
+        maDe = intent.getIntExtra("maDe", 1);
+        current_time = intent.getIntExtra("time", 1140*1000);
+        current_answer = intent.getIntExtra("currentQS", 1);
+        getListQuestion(maDe);
         set_answer(current_answer);
         set_listCH();
         setEvent();
         count_down();
         status_btnsave();
-
     }
 
     private void setEvent() {
@@ -82,7 +95,6 @@ public class QuestionActivity extends AppCompatActivity{
                     btn_save.setChecked(true);
                     setMarked(id,true);
                     listQuestion.get(current_answer-1).setMarked(true);
-                    Toast.makeText(QuestionActivity.this, String.valueOf(database.getMarked(id)), Toast.LENGTH_SHORT).show();
                 } else {
                     btn_save.setChecked(false);
                     setMarked(id,false);
@@ -94,9 +106,8 @@ public class QuestionActivity extends AppCompatActivity{
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //finish();
-                int i = listQuestion.get(current_answer-1).getChoose();
-                Toast.makeText(QuestionActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+                database.saveStatus(timeLeft,current_answer,maDe);
+                finish();
             }
         });
 
@@ -106,7 +117,6 @@ public class QuestionActivity extends AppCompatActivity{
                 if(current_answer==25){
                     submitDialog();
                 }else nextQuestion();
-
             }
         });
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +128,9 @@ public class QuestionActivity extends AppCompatActivity{
     }
     public void change_nextButton(){
         btn_next.setText("Nộp bài");
+    }
+    public void return_nextButton(){
+        btn_next.setText("Tiếp tục");
     }
     public void status_btnsave(){
         if (listQuestion.get(current_answer-1).isMarked()){
@@ -140,12 +153,15 @@ public class QuestionActivity extends AppCompatActivity{
             }else cau_sai+=1;
         }
 
+        database.setKq(maDe);
+
         Intent intent = new Intent(getApplicationContext(), KetQuaActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("time",String.valueOf(tv_time.getText()));
         bundle.putInt("cau_dung", cau_dung);
         bundle.putInt("cau_sai", cau_sai);
         bundle.putInt("cau_chua_lam", cau_chua_lam);
+        bundle.putInt("maDe", maDe);
         intent.putExtras(bundle);
         startActivity(intent);
         //Toast.makeText(this, "Đã nộp bài", Toast.LENGTH_SHORT).show();
@@ -177,6 +193,7 @@ public class QuestionActivity extends AppCompatActivity{
         tv_ten_cau_hoi = findViewById(R.id.tv_ten_cau_hoi);
         tv_time = findViewById(R.id.tv_time);
         recyclerView = findViewById(R.id.listDapAn);
+        iv_cauhoi = findViewById(R.id.iv_cauhoi);
     }
 
     private void set_listCH(){
@@ -193,7 +210,7 @@ public class QuestionActivity extends AppCompatActivity{
         rv_listCH.setLayoutManager(mGridLayoutManager);
     }
     private void getListQuestion(int maDe){
-        cursor = database.getData("SELECT * FROM Question as qs JOIN links as lk ON qs.id = lk.maCH WHERE lk.maDe = 1");
+        cursor = database.getData("SELECT * FROM Question as qs JOIN links as lk ON qs.id = lk.maCH WHERE lk.maDe ="+maDe);
         while (cursor.moveToNext()){
             //Questions(int question_id,String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose,int maDe)
             listQuestion.add(new Questions(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
@@ -201,8 +218,24 @@ public class QuestionActivity extends AppCompatActivity{
         }
     }
     public void set_answer(int question_index){
+        if(current_answer==25){
+            change_nextButton();
+        }
         tv_ten_cau_hoi.setText("Câu "+String.valueOf(question_index));
         tv_cau_hoi.setText(listQuestion.get(question_index-1).getQuestion_content());
+        String image = listQuestion.get(question_index-1).getImage();
+        if(image != null){
+            try {
+                InputStream ims = this.getAssets().open("images/"+image);
+                Drawable d = Drawable.createFromStream(ims, null);
+                iv_cauhoi.setImageDrawable(d);
+            } catch (IOException ex) {
+                Log.d("error", "error load image: "+ex);
+            }
+        } else{
+            iv_cauhoi.setImageDrawable(null);
+        }
+
         //
         String a,b,c,d;
         a = listQuestion.get(question_index-1).getAnswer1();
@@ -231,24 +264,25 @@ public class QuestionActivity extends AppCompatActivity{
         return String.valueOf(minutes)+":"+String.valueOf(seconds);
     }
     private void count_down(){
-        Timer = new CountDownTimer(1140*1000,1000) {
+        //1140*1000
+        Timer = new CountDownTimer(current_time,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                timeLeft=millisUntilFinished;
                 tv_time.setText(convert_time(millisUntilFinished));
             }
             @Override
             public void onFinish() {
-                tv_time.setText("Hết giờ");
+                Toast.makeText(QuestionActivity.this, "Hết giờ", Toast.LENGTH_SHORT).show();
+                submit();
             }
         }.start();
     }
     public int getchoose(){
-        int maDe = 1;
         int question_id = listQuestion.get(current_answer-1).getQuestion_id();
         return database.getChoose(question_id,maDe);
     }
     public void setchoose(int choose){
-        int maDe = 1;
         int question_id = listQuestion.get(current_answer-1).getQuestion_id();
         listQuestion.get(current_answer-1).setChoose(choose);
         database.setChoose(question_id,choose,maDe);

@@ -16,9 +16,9 @@ import android.widget.TextView;
 import com.example.thibanglai.model.BienBao;
 import com.example.thibanglai.R;
 import com.example.thibanglai.other.FormattingString;
-import com.example.thibanglai.ui.TimKiemActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import java.io.IOException;
+import java.io.InputStream;
+import android.graphics.drawable.Drawable;
 import java.text.Normalizer;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -57,18 +57,16 @@ public class BienBaoAdapter extends ArrayAdapter {
             holder=(ViewHolder) convertView.getTag();
         final BienBao item=arrBienBao.get(position);
         Resources resources = context.getResources();
-        holder.tvTenItem.setText(getTenItem(item.getMaBienBao(), item.getLoaiBienBao(), item.getTenBienBao()));
+        holder.tvTenItem.setText(getTenItem.getTenItem(context,item.getMaBienBao(), item.getLoaiBienBao(), item.getTenBienBao()));
         holder.tvNoiDung.setText(item.getNoiDung());
         holder.ivHinhAnh.setImageResource(resources.getIdentifier(item.getThumb(),"drawable",context.getPackageName()));
         return convertView;
     }
+
     public class ViewHolder{
         TextView tvTenItem;
         TextView tvNoiDung;
         ImageView ivHinhAnh;
-    }
-    public String getTenItem(String maBienBao, String loaiBienBao, String tenBienBao ) {
-        return context.getResources().getString(R.string.item_bien_bao,loaiBienBao,maBienBao,tenBienBao);
     }
 
     public void filter(String key){

@@ -45,7 +45,7 @@ public class ListCauHoiAdapter extends RecyclerView.Adapter<ListCauHoiAdapter.Li
                     int cr_ans = position+1;
                     if(cr_ans==25){
                         ((QuestionActivity)context).change_nextButton();
-                    }
+                    } else  ((QuestionActivity)context).return_nextButton();
                     ((QuestionActivity)context).current_answer = cr_ans;
                     ((QuestionActivity)context).set_answer(cr_ans);
                     ((QuestionActivity)context).status_btnsave();

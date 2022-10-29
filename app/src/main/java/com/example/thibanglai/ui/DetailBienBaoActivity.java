@@ -3,7 +3,9 @@ package com.example.thibanglai.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.thibanglai.R;
 import com.example.thibanglai.adapter.BienBaoAdapter;
 import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.model.BienBao;
+import com.example.thibanglai.other.FormattingString;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -71,10 +74,14 @@ public class DetailBienBaoActivity extends AppCompatActivity {
         ib_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BienBaoActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
+    }
+    public String getTenItem( String maBienBao, String loaiBienBao, String tenBienBao ) {
+        if(loaiBienBao.equalsIgnoreCase("adfasdf")){
+            return tenBienBao;
+        }else return this.getResources().getString(R.string.item_bien_bao,loaiBienBao,maBienBao,tenBienBao);
     }
 
     private void List_bien_bao() {
@@ -104,8 +111,5 @@ public class DetailBienBaoActivity extends AppCompatActivity {
         lv_bien_bao = findViewById(R.id.lv_bien_bao);
         ib_Back = findViewById(R.id.ib_Back);
 
-    }
-    public String getTenItem(String maBienBao, String loaiBienBao, String tenBienBao ) {
-        return this.getResources().getString(R.string.item_bien_bao,loaiBienBao,maBienBao,tenBienBao);
     }
 }

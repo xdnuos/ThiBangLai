@@ -31,7 +31,7 @@ import java.util.List;
 
 public class BienBaoActivity extends AppCompatActivity
 {
-    ArrayList<BienBao> data = new ArrayList<>();
+    public static ArrayList<BienBao> data = new ArrayList<>();
     BienBaoAdapter adapter;
 
     BienBao bienBao = null;

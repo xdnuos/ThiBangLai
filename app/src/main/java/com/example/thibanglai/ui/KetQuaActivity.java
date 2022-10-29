@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +69,7 @@ public class KetQuaActivity extends AppCompatActivity {
         int cau_dung= bundle.getInt("cau_dung", 0);
         int cau_sai= bundle.getInt("cau_sai", 0);
         int cau_chua_lam= bundle.getInt("cau_chua_lam", 0);
+        int maDe= bundle.getInt("maDe", 2);
 
         tv_time_lam.setText(time);
         tv_ket_qua.setText(getKetqua(cau_dung));
@@ -78,14 +80,19 @@ public class KetQuaActivity extends AppCompatActivity {
         btn_lam_lai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), BienBaoActivity.class);
-//                startActivity(intent);
+                //Toast.makeText(KetQuaActivity.this, String.valueOf(maDe), Toast.LENGTH_SHORT).show();
+                databaseBB = new DataBaseHelper(getApplicationContext());
+                databaseBB.clear(maDe);
+                Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.putExtra("maDe", maDe);
+                startActivity(intent);
             }
         });
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //list de bai
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }

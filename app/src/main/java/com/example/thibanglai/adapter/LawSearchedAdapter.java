@@ -3,6 +3,7 @@ package com.example.thibanglai.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.thibanglai.R;
 import com.example.thibanglai.interf.IItemClick;
 import com.example.thibanglai.model.BienBao;
 import com.example.thibanglai.other.FormattingString;
+import com.example.thibanglai.ui.DetailBienBaoActivity;
 import com.example.thibanglai.ui.DetailLawActivity;
 import com.example.thibanglai.ui.QuestionActivity;
 
@@ -45,7 +47,14 @@ public class LawSearchedAdapter extends RecyclerView.Adapter<LawSearchedAdapter.
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(context, DetailLawActivity.class);
+//                Intent intent = new Intent(context, DetailLawActivity.class);
+//                context.startActivity(intent);
+
+                final BienBao item=laws.get(position);
+                Intent intent = new Intent(context, DetailBienBaoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("value",item);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });

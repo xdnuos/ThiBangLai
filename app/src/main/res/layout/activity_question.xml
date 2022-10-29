@@ -104,12 +104,11 @@
                 android:textSize="16dp" />
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:id="@+id/iv_cauhoi"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:maxHeight="180dp"
-                android:src="@null" />
+                android:adjustViewBounds="true"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listDapAn"
