@@ -134,9 +134,11 @@ public class BienBaoActivity extends AppCompatActivity
 
         listLoaiBB = new ArrayList<>();
         listLoaiBB.add("Biển báo cấm");
-        listLoaiBB.add("Biển hiệu lệnh");
-        listLoaiBB.add("Biển chỉ dẫn");
-        listLoaiBB.add("Biển cảnh báo");
+        listLoaiBB.add("Biển báo hiệu lệnh");
+        listLoaiBB.add("Biển báo chỉ dẫn");
+        listLoaiBB.add("Biển báo nguy hiểm");
+        listLoaiBB.add("Biển báo phụ");
+        listLoaiBB.add("Vạch kẻ đường");
 
         loaiBienBaoAdapter = new LoaiBienBaoAdapter(this,listLoaiBB);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

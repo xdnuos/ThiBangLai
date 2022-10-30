@@ -111,7 +111,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/home_button"
                     android:backgroundTint="#B521FB"
-                    android:drawableTop="@drawable/ic_bookmark_line"
+                    android:drawableTop="@drawable/ic_bookmark_white"
                     android:padding="30dp"
                     android:text="Câu đã lưu"
                     android:textAllCaps="false"

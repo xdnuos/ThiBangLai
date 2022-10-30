@@ -30,37 +30,17 @@ import java.io.IOException;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    BottomNavigationView bottomNavigationView;
-    SharedPreferences sharedPreferences;
-    boolean isFirstRun;
-    SharedPreferences.Editor editor;
     Button btn_lam_de,btn_cau_sai,btn_bien_bao,btn_cau_save,btn_tips,btn_tra_cuu_luat;
-    DataBaseHelper database;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         setControl();
-        try {
-            Khoi_tao();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         setEvent();
         return root;
     }
-    private void Khoi_tao() throws IOException {
-        database = new DataBaseHelper(getActivity());
-        sharedPreferences = getActivity().getSharedPreferences(nameSharedPreference, Context.MODE_PRIVATE);
-        isFirstRun = sharedPreferences.getBoolean("isFirstRun",true);
-        if(isFirstRun){
-            editor = sharedPreferences.edit();
-            editor.putBoolean("isFirstRun",false);
-            editor.apply();
-            database.createDatabase();
-        }
-    }
+
     private void setControl() {
         btn_lam_de = binding.getRoot().findViewById(R.id.btn_lamde);
         btn_cau_sai = binding.getRoot().findViewById(R.id.btn_cau_sai);
