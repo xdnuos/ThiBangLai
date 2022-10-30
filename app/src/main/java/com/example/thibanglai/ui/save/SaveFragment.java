@@ -1,30 +1,33 @@
-package com.example.thibanglai.ui;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.thibanglai.R;
-import com.example.thibanglai.adapter.ListCauHoiAdapter;
-import com.example.thibanglai.adapter.ListSaveAdapter;
-import com.example.thibanglai.database.DataBaseHelper;
-import com.example.thibanglai.model.Questions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+package com.example.thibanglai.ui.save;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.thibanglai.R;
+import com.example.thibanglai.adapter.ListSaveAdapter;
+import com.example.thibanglai.database.DataBaseHelper;
+import com.example.thibanglai.databinding.FragmentSaveBinding;
+import com.example.thibanglai.model.Questions;
+import com.example.thibanglai.ui.DetailCauLuuActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CauLuuActivity extends AppCompatActivity {
+public class SaveFragment extends Fragment implements ListSaveAdapter.EventListener{
+
+    private FragmentSaveBinding binding;
+
     public int number_save = 0;
     RecyclerView rv_list_save;
     Cursor cursor;
@@ -33,53 +36,39 @@ public class CauLuuActivity extends AppCompatActivity {
     ListSaveAdapter listSaveAdapter;
     ArrayList<Questions> listQuestion = new ArrayList<>();
     GridLayoutManager mGridLayoutManager;
-    BottomNavigationView bottomNavigationView;
     TextView tv_chua_luu;
     ImageButton btn_back;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cau_luu);
-        database = new DataBaseHelper(this);
 
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        binding = FragmentSaveBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
         setControl();
         setEvent();
-        bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.settings:
-                        return true;
-                }
-                return false;
-            }
-        });
+        return root;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
     private void setEvent() {
+        database = new DataBaseHelper(getActivity());
         number_save = database.getNumberSave();
         set_listCH();
         setListQuestion();
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                getActivity().onBackPressed();
             }
         });
     }
 
     public void openDetailSaveQuestion(int position){
-        Intent intent = new Intent(this,DetailCauLuuActivity.class);
+        Intent intent = new Intent(getActivity(), DetailCauLuuActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("qs_index",position+1);
         bundle.putSerializable("value",listQuestion.get(position));
@@ -88,9 +77,9 @@ public class CauLuuActivity extends AppCompatActivity {
     }
 
     private void setControl() {
-        tv_chua_luu = findViewById(R.id.tv_chua_luu);
-        rv_list_save = findViewById(R.id.rv_list_save);
-        btn_back = findViewById(R.id.btnBack);
+        tv_chua_luu = binding.getRoot().findViewById(R.id.tv_chua_luu);
+        rv_list_save = binding.getRoot().findViewById(R.id.rv_list_save);
+        btn_back = binding.getRoot().findViewById(R.id.btnBack);
     }
     private void set_listCH(){
 
@@ -101,8 +90,8 @@ public class CauLuuActivity extends AppCompatActivity {
         if(listNumberSave.size() ==0){
             tv_chua_luu.setText("Bạn chưa lưu câu hỏi nào !");
         } else tv_chua_luu.setText("");
-        listSaveAdapter = new ListSaveAdapter(this,listNumberSave);
-        mGridLayoutManager = new GridLayoutManager(this,7);
+        listSaveAdapter = new ListSaveAdapter(getActivity(),listNumberSave,this);
+        mGridLayoutManager = new GridLayoutManager(getActivity(),7);
         rv_list_save.setAdapter(listSaveAdapter);
         rv_list_save.setLayoutManager(mGridLayoutManager);
     }
@@ -114,5 +103,4 @@ public class CauLuuActivity extends AppCompatActivity {
                     cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getInt(10) == 1,cursor.getInt(11)==1,cursor.getInt(12)==1,0,-1));
         }
     }
-
 }

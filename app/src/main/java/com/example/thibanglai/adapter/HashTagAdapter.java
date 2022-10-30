@@ -1,11 +1,11 @@
 package com.example.thibanglai.adapter;
 
 import static com.example.thibanglai.setting.MyApplication.isChangeEdtInAdapter;
-import static com.example.thibanglai.ui.TimKiemActivity.edtSearch;
-import static com.example.thibanglai.ui.TimKiemActivity.lawSearchedAdapter;
-import static com.example.thibanglai.ui.TimKiemActivity.BienBaoSearch;
-import static com.example.thibanglai.ui.TimKiemActivity.rvHashtag;
-import static com.example.thibanglai.ui.TimKiemActivity.rvLawSearched;
+import static com.example.thibanglai.ui.search.SearchFragment.edtSearch;
+import static com.example.thibanglai.ui.search.SearchFragment.lawSearchedAdapter;
+import static com.example.thibanglai.ui.search.SearchFragment.BienBaoSearch;
+import static com.example.thibanglai.ui.search.SearchFragment.rvHashtag;
+import static com.example.thibanglai.ui.search.SearchFragment.rvLawSearched;
 
 import android.content.Context;
 import android.database.Cursor;

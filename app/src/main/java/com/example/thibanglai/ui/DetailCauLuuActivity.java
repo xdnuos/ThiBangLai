@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thibanglai.MainActivity;
 import com.example.thibanglai.R;
 import com.example.thibanglai.adapter.SaveQuestionAdapter;
 import com.example.thibanglai.database.DataBaseHelper;
@@ -13,7 +14,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,22 +63,28 @@ public class DetailCauLuuActivity extends AppCompatActivity {
         set_answer();
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        int size = bottomNavigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            bottomNavigationView.getMenu().getItem(i).setCheckable(false);
+        }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent i = new Intent();
                 switch (item.getItemId()){
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
-                        overridePendingTransition(0,0);
+                        i = new Intent(getApplicationContext(), com.example.thibanglai.MainActivity.class);
+                        i.putExtra("tab", 1);
+                        startActivity(i);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.settings:
-                        startActivity(new Intent(getApplicationContext(),CauLuuActivity.class));
-                        overridePendingTransition(0,0);
+                    case R.id.save:
+                        i = new Intent(getApplicationContext(), com.example.thibanglai.MainActivity.class);
+                        i.putExtra("tab", 2);
+                        startActivity(i);
                         return true;
                 }
                 return false;
@@ -106,8 +112,9 @@ public class DetailCauLuuActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CauLuuActivity.class);
-                startActivity(intent);
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("tab", 2);
+                startActivity(i);
             }
         });
     }

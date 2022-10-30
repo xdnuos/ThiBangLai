@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.thibanglai.R;
 import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.interf.IItemClick;
-import com.example.thibanglai.ui.CauLuuActivity;
 import com.example.thibanglai.ui.CauSaiActivity;
 
 import java.util.List;

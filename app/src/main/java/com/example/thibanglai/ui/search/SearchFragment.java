@@ -1,59 +1,58 @@
-package com.example.thibanglai.ui;
+package com.example.thibanglai.ui.search;
 
 import static com.example.thibanglai.setting.MyApplication.isChangeEdtInAdapter;
-import static com.example.thibanglai.setting.MyApplication.nameSharedPreference;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thibanglai.R;
 import com.example.thibanglai.adapter.HashTagAdapter;
 import com.example.thibanglai.adapter.LawSearchedAdapter;
 import com.example.thibanglai.database.DataBaseHelper;
+import com.example.thibanglai.databinding.FragmentSearchBinding;
 import com.example.thibanglai.model.BienBao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimKiemActivity extends AppCompatActivity {
+public class SearchFragment extends Fragment {
 
+    private FragmentSearchBinding binding;
     public static EditText edtSearch;
     public static RecyclerView rvHashtag,rvLawSearched;
     public static LawSearchedAdapter lawSearchedAdapter;
     HashTagAdapter hashTagAdapter;
     List<String> listHashtag;
     LinearLayoutManager linearLayoutManager;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    boolean isFirstRun;
     DataBaseHelper database;
     Handler handler;
     Runnable runnable;
     public static List<BienBao> BienBaoSearch;
     Cursor cursor;
     String stringSearched="";
-    BottomNavigationView bottomNavigationView;
+    View root;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_tim_kiem);
-        database = new DataBaseHelper(this);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        //code
+        database = new DataBaseHelper(getActivity());
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -69,7 +68,7 @@ public class TimKiemActivity extends AppCompatActivity {
                 }
                 if(lawSearchedAdapter!=null) lawSearchedAdapter.notifyDataSetChanged();
                 else {
-                    lawSearchedAdapter = new LawSearchedAdapter(TimKiemActivity.this, BienBaoSearch);
+                    lawSearchedAdapter = new LawSearchedAdapter(getActivity(), BienBaoSearch);
                     rvLawSearched.setAdapter(lawSearchedAdapter);
                 }
             }
@@ -95,32 +94,21 @@ public class TimKiemActivity extends AppCompatActivity {
 
             }
         });
-        bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.search:
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                    case R.id.settings:
-                        //startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
-                        //overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });
+        //code
+        return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
     private void initView(){
-        rvHashtag = findViewById(R.id.rv_hashtag);
-        edtSearch = findViewById(R.id.edt_search);
-        rvLawSearched = findViewById(R.id.rv_law_searched);
 
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvHashtag = binding.getRoot().findViewById(R.id.rv_hashtag);
+        edtSearch = binding.getRoot().findViewById(R.id.edt_search);
+        rvLawSearched = binding.getRoot().findViewById(R.id.rv_law_searched);
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
         BienBaoSearch = new ArrayList<>();
         listHashtag = new ArrayList<>();
@@ -130,9 +118,8 @@ public class TimKiemActivity extends AppCompatActivity {
         listHashtag.add("#Quay đầu");
         listHashtag.add("#Rẽ trái");
 
-        hashTagAdapter = new HashTagAdapter(this,listHashtag);
+        hashTagAdapter = new HashTagAdapter(getActivity(),listHashtag);
         rvHashtag.setLayoutManager(linearLayoutManager);
         rvHashtag.setAdapter(hashTagAdapter);
-
     }
 }

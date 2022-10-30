@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.thibanglai.R;
 import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.interf.IItemClick;
-import com.example.thibanglai.ui.CauLuuActivity;
-import com.example.thibanglai.ui.QuestionActivity;
 
 import java.util.List;
 
@@ -22,11 +20,16 @@ public class ListSaveAdapter extends RecyclerView.Adapter<ListSaveAdapter.ListCa
     Context context;
     List<String> listCauHoi;
     DataBaseHelper database;
+    EventListener listener;
+    public interface EventListener {
+        void openDetailSaveQuestion(int position);
+    }
 
-    public ListSaveAdapter(Context context, List<String> listCauHoi) {
+    public ListSaveAdapter(Context context, List<String> listCauHoi,EventListener listener) {
         this.context = context;
         this.listCauHoi = listCauHoi;
         database = new DataBaseHelper(context);
+        this.listener = listener;
     }
 
     @NonNull
@@ -41,7 +44,8 @@ public class ListSaveAdapter extends RecyclerView.Adapter<ListSaveAdapter.ListCa
         holder.setiItemClick(new IItemClick() {
             @Override
             public void onClick(View view, int position) {
-                ((CauLuuActivity)context).openDetailSaveQuestion(position);
+                //((CauLuuActivity)context).openDetailSaveQuestion(position);
+                listener.openDetailSaveQuestion(position);
             }
         });
         holder.textView.setText(listCauHoi.get(position));

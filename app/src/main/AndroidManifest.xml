@@ -15,11 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThiBangLai"
         tools:targetApi="31">
+
         <activity
-            android:name=".DetailCauSai"
+            android:name=".ui.DetailCauSaiActivity"
             android:exported="false" />
         <activity
-            android:name=".CauSaiActivity"
+            android:name=".ui.CauSaiActivity"
             android:exported="false" />
         <activity
             android:name=".ui.DetailCauLuuActivity"
@@ -34,7 +35,7 @@
             android:name=".ui.DetailLawActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.TimKiemActivity"
+            android:name=".unUsed.TimKiemActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LawDetailActivity"
@@ -58,17 +59,9 @@
             android:name=".ui.ExamActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CauLuuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.CauSaiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.DetailCauSaiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
