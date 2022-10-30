@@ -56,11 +56,7 @@ public class BienBaoActivity extends AppCompatActivity
         setContentView(R.layout.layout_bien_bao);
         setControl();
         setListLoaiBB();
-        try {
-            Khoi_tao();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        databaseBB = new DataBaseHelper(this);
         setEvent();
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -84,26 +80,12 @@ public class BienBaoActivity extends AppCompatActivity
         });
     }
 
-    private void Khoi_tao() throws IOException {
-        databaseBB = new DataBaseHelper(this);
-        //databaseBB.getWritableDatabase();
-        sharedPreferences = getSharedPreferences(nameSharedPreference,MODE_PRIVATE);
-        isFirstRun = sharedPreferences.getBoolean("isFirstRun",true);
-        if(isFirstRun){
-            editor = sharedPreferences.edit();
-            editor.putBoolean("isFirstRun",false);
-            editor.apply();
-            databaseBB.createDatabase();
-        }
-    }
-
     private void setControl() {
         lv_bien_bao = findViewById(R.id.lv_bien_bao);
         searchView = findViewById(R.id.searchView_BB);
         btn_back = findViewById(R.id.btn_back);
     }
     private void setEvent() {
-        //databaseBB = new Database(this,nameDB,null,1);
         databaseBB.openDatabase();
         data.clear();
         data.addAll(databaseBB.ReadBienBao());

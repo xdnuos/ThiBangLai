@@ -53,11 +53,7 @@ public class TimKiemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_tim_kiem);
-        try {
-            Khoi_tao();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        database = new DataBaseHelper(this);
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -119,19 +115,6 @@ public class TimKiemActivity extends AppCompatActivity {
             }
         });
     }
-    private void Khoi_tao() throws IOException {
-        database = new DataBaseHelper(this);
-        //databaseBB.getWritableDatabase();
-        sharedPreferences = getSharedPreferences(nameSharedPreference,MODE_PRIVATE);
-        isFirstRun = sharedPreferences.getBoolean("isFirstRun",true);
-        if(isFirstRun){
-            editor = sharedPreferences.edit();
-            editor.putBoolean("isFirstRun",false);
-            editor.apply();
-            database.createDatabase();
-        }
-    }
-
     private void initView(){
         rvHashtag = findViewById(R.id.rv_hashtag);
         edtSearch = findViewById(R.id.edt_search);

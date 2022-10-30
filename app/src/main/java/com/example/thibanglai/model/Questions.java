@@ -11,7 +11,7 @@ public class Questions implements Serializable {
     private String answer_des;
     private boolean marked,wrong,question_die;//question_die: câu điểm liệt
     private int choose; // maCH FK
-    private int maDe;
+    private int maDe,wrong_choose;
 
     public Questions() {
     }
@@ -24,7 +24,7 @@ public class Questions implements Serializable {
         this.choose = choose;
     }
 
-    public Questions(int question_id,String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose) {
+    public Questions(int question_id,String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose, int wrong_choose) {
         this.question_content = question_content;
         this.image = image;
         this.answer1 = answer1;
@@ -38,6 +38,15 @@ public class Questions implements Serializable {
         this.question_die = question_die;
         this.choose = choose;
         this.question_id = question_id;
+        this.wrong_choose = wrong_choose;
+    }
+
+    public int getWrong_choose() {
+        return wrong_choose;
+    }
+
+    public void setWrong_choose(int wrong_choose) {
+        this.wrong_choose = wrong_choose;
     }
 
     public int getMaDe() {

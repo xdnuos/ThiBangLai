@@ -13,7 +13,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/btn_line"
             android:padding="16dp"
-            android:text="A. Phần mặt đường và lề đường"
+            android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
