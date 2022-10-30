@@ -207,7 +207,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private void generateCauhoi(int LastMaDe,SQLiteDatabase database) {
         int maCH[] = noiMang(getLT(database),getBB(database),getSH(database));
-        Log.d("debug", String.valueOf(maCH.length));
+        Log.d("so cau hoi", String.valueOf(maCH.length));
         for(int i =0;i<25;i++){
             String sql2="insert into links (maDe,maCH,choose) values(?,?,?)";
             database.execSQL(sql2, new String[]{String.valueOf(LastMaDe+1),String.valueOf(maCH[i]),String.valueOf(0)});
@@ -311,7 +311,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(sql,null);
         if(cursor.moveToFirst()){
             do {
-                Log.d("adu", String.valueOf(cursor.getInt(0)));
+                Log.d("last ma de", String.valueOf(cursor.getInt(0)));
                 return cursor.getInt(0);
             }while (cursor.moveToNext());
         } else return 1;
@@ -366,8 +366,61 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 return cursor.getInt(0);
             }while (cursor.moveToNext());
+        } else return 1;
+    }
+    public int getNumberSave(){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT COUNT(*) FROM Question WHERE marked =1";
+        Cursor cursor = database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do {
+                return cursor.getInt(0);
+            }while (cursor.moveToNext());
         } else return 0;
     }
-
+    public int getNumberWrong(){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT COUNT(*) FROM Question WHERE wrong =1";
+        Cursor cursor = database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do {
+                return cursor.getInt(0);
+            }while (cursor.moveToNext());
+        } else return 0;
+    }
+    public int getWrongChoose(int id){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT wrong_choose FROM Question WHERE id ="+id;
+        Cursor cursor = database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do {
+                return cursor.getInt(0);
+            }while (cursor.moveToNext());
+        } else return -1;
+    }
+    public void setWrongChoose(int id,int wrong_choose){
+        SQLiteDatabase database = getWritableDatabase();
+        //UPDATE exam SET num_correct_answer =1
+        String sql = "UPDATE Question SET wrong_choose ="+wrong_choose+" WHERE id ="+id;
+        database.execSQL(sql);
+        database.close();
+    }
+    public void setWrongQuestion(int id,boolean stt){
+        SQLiteDatabase database = getWritableDatabase();
+        //UPDATE exam SET num_correct_answer =1
+        String sql = "UPDATE Question SET wrong ="+(stt ? 1: 0)+" WHERE id ="+id;
+        database.execSQL(sql);
+        database.close();
+    }
+    public int getQuestionID(int maDe){
+        SQLiteDatabase database = getReadableDatabase();
+        String sql = "SELECT maCH FROM links WHERE maDe ="+maDe;
+        Cursor cursor = database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do {
+                return cursor.getInt(0);
+            }while (cursor.moveToNext());
+        } else return -1;
+    }
 }
 

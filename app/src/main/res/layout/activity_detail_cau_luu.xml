@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.QuestionActivity">
+    android:layout_marginTop="20dp"
+    tools:context=".ui.DetailCauLuuActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -21,32 +22,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="19:00"
+            android:layout_marginRight="48dp"
+            android:text="Câu đã lưu"
             android:textColor="@color/black"
             android:textSize="24dp"
-            android:layout_marginLeft="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_submit"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnBack"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nộp bài"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:layout_marginRight="12dp"
-            android:backgroundTint="@color/primary_green"
-            android:layout_marginVertical="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -111,37 +100,35 @@
                 android:adjustViewBounds="true"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listDapAn"
+            android:id="@+id/listDapAnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:background="@color/white"
             android:layout_marginTop="20dp" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listCauHoi"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="@color/white"
-            android:layout_marginTop="36dp" />
+            android:id="@+id/tv_des"
+            android:background="@drawable/btn_mini_red"
+            android:backgroundTint="#FDFF92"
+            android:padding="10dp"
+            android:text="Giải thích đáp án: Phần đường xe chạy là phần đường bộ được sử dụng cho phương tiện giao thông qua lại "
+            android:layout_margin="20dp"/>
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_next"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="33dp"
-        android:background="@drawable/home_button"
-        android:backgroundTint="@color/primary_green"
-        android:textColor="@color/white"
-        android:text="Tiếp tục"
-        android:textAllCaps="false"
-        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav" />
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

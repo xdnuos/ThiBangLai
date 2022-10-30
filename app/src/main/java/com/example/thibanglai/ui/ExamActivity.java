@@ -2,6 +2,7 @@ package com.example.thibanglai.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -61,6 +62,9 @@ public class ExamActivity extends AppCompatActivity {
                     }
                     int time = database.getTime(i+1);
                     int currentQuestion = database.getCurrentQuestion(i+1);
+                    if (currentQuestion ==0){
+                        currentQuestion =1;
+                    }
                     Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
                     intent.putExtra("maDe", i+1);
                     intent.putExtra("time", time);

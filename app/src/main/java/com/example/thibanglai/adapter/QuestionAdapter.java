@@ -68,6 +68,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             holder.textView.setTextColor(Color.parseColor("#000000"));
             holder.textView.setSelected(false);
         }
+
         holder.textView.setText(list_answer.get(position));
     }
     @Override

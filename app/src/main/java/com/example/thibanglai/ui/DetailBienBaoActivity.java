@@ -3,9 +3,7 @@ package com.example.thibanglai.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +13,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.thibanglai.MainActivity;
 import com.example.thibanglai.R;
 import com.example.thibanglai.adapter.BienBaoAdapter;
 import com.example.thibanglai.database.DataBaseHelper;
 import com.example.thibanglai.model.BienBao;
-import com.example.thibanglai.other.FormattingString;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -43,20 +41,28 @@ public class DetailBienBaoActivity extends AppCompatActivity {
         setControl();
         setEvent();
         bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        int size = bottomNavigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            bottomNavigationView.getMenu().getItem(i).setCheckable(false);
+        }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent i = new Intent();
                 switch (item.getItemId()){
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(), TimKiemActivity.class));
-                        overridePendingTransition(0,0);
+                        i = new Intent(getApplicationContext(), com.example.thibanglai.MainActivity.class);
+                        i.putExtra("tab", 1);
+                        startActivity(i);
                         return true;
                     case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
-                    case R.id.settings:
-                        //startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
-                        //overridePendingTransition(0,0);
+                    case R.id.save:
+                        i = new Intent(getApplicationContext(), com.example.thibanglai.MainActivity.class);
+                        i.putExtra("tab", 2);
+                        startActivity(i);
                         return true;
                 }
                 return false;

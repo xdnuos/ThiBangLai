@@ -12,9 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.thibanglai.MainActivity;
 import com.example.thibanglai.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 public class TipActivity extends AppCompatActivity {
 
@@ -137,22 +137,28 @@ public class TipActivity extends AppCompatActivity {
         });
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        int size = bottomNavigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            bottomNavigationView.getMenu().getItem(i).setCheckable(false);
+        }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent i = new Intent();
                 switch (item.getItemId()){
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
-                        overridePendingTransition(0,0);
+                        i = new Intent(getApplicationContext(), com.example.thibanglai.MainActivity.class);
+                        i.putExtra("tab", 1);
+                        startActivity(i);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.settings:
-                        //startActivity(new Intent(getApplicationContext(),TimKiemActivity.class));
-                        //overridePendingTransition(0,0);
+                    case R.id.save:
+                        i = new Intent(getApplicationContext(), com.example.thibanglai.MainActivity.class);
+                        i.putExtra("tab", 2);
+                        startActivity(i);
                         return true;
                 }
                 return false;

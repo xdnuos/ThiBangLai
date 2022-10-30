@@ -137,6 +137,11 @@ public class QuestionActivity extends AppCompatActivity{
             btn_save.setChecked(true);
         } else btn_save.setChecked(false);
     }
+    public void save_wrong_choose(int i, int wrong_choose,boolean stt){
+        int questionID = listQuestion.get(i).getQuestion_id();
+        database.setWrongChoose(questionID,wrong_choose);
+        database.setWrongQuestion(questionID,stt);
+    }
     public void submit() {
 
         int cau_dung=0;
@@ -147,14 +152,17 @@ public class QuestionActivity extends AppCompatActivity{
             int choose = listQuestion.get(i).getChoose();
             if (choose==0){
                 cau_chua_lam+=1;
-            }
-            if (listQuestion.get(i).getChoose()==listQuestion.get(i).getCorrect_answer()){
+            } else if (choose==listQuestion.get(i).getCorrect_answer()){
                 cau_dung+=1;
-            }else cau_sai+=1;
+                save_wrong_choose(i,choose,false);
+            }else {
+                save_wrong_choose(i,choose,true);
+                cau_sai+=1;
+            }
         }
 
         database.setKq(maDe);
-
+        Log.d("ket_qua", "cau sai: "+cau_sai+"cau chua lam"+cau_chua_lam);
         Intent intent = new Intent(getApplicationContext(), KetQuaActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("time",String.valueOf(tv_time.getText()));
@@ -214,7 +222,7 @@ public class QuestionActivity extends AppCompatActivity{
         while (cursor.moveToNext()){
             //Questions(int question_id,String question_content, String image, String answer1, String answer2, String answer3, String answer4, int correct_answer, String answer_des, boolean marked, boolean wrong, boolean question_die, int choose,int maDe)
             listQuestion.add(new Questions(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),
-                    cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getInt(10) == 1,cursor.getInt(11)==1,cursor.getInt(12)==1,cursor.getInt(16)));
+                    cursor.getString(5),cursor.getString(6),cursor.getInt(7),cursor.getString(8),cursor.getInt(10) == 1,cursor.getInt(11)==1,cursor.getInt(12)==1,cursor.getInt(17),-1));
         }
     }
     public void set_answer(int question_index){
