@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.thibanglai.R;
 import com.example.thibanglai.model.ItemLaw;
 import com.example.thibanglai.ui.LawDetailActivity;
+import com.example.thibanglai.ui.ListLawActivity;
 
 import java.util.List;
 
@@ -43,16 +44,16 @@ public class ItemLawAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = layoutInflater.inflate(R.layout.layout_item_law,null);
-        TextView tvNamePentally = view.findViewById(R.id.tv_name_pentaly);
-        TextView tvMoneyPentally = view.findViewById(R.id.money_pentally);
-        tvMoneyPentally.setText(list.get(i).getMoneyPentally());
-        tvNamePentally.setText(list.get(i).getNamePentally());
+        TextView tv_name = view.findViewById(R.id.tv_name);
+        TextView tv_fines = view.findViewById(R.id.tv_fines);
+        tv_name.setText(list.get(i).getName());
+        tv_fines.setText(list.get(i).getFines());
+
         TextView tvDetail = view.findViewById(R.id.present_detail);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, LawDetailActivity.class);
-                context.startActivity(intent);
+                ((ListLawActivity)context).openDetailLaw(i);
             }
         });
         return view;

@@ -35,15 +35,15 @@ public class ResearchLawActivity extends AppCompatActivity {
         gridView = findViewById(R.id.grid_item);
         list = new ArrayList<>();
         list.add(new ItemGrid(R.drawable.hlcd,"Hiệu lệnh chỉ dẫn"));
+        list.add(new ItemGrid(R.drawable.chnd,"Chuyển hướng nhường đường"));
+        list.add(new ItemGrid(R.drawable.dxdx,"Dừng xe, đỗ xe"));
+        list.add(new ItemGrid(R.drawable.tbutvc,"Thiết bị ưu tiên và còi"));
         list.add(new ItemGrid(R.drawable.tdvkcat,"Tốc độ, khoảng cách an toàn"));
         list.add(new ItemGrid(R.drawable.vcnh,"Vận chuyển người, hàng"));
-        list.add(new ItemGrid(R.drawable.tbutvc,"Thiết bị ưu tiên và còi"));
+        list.add(new ItemGrid(R.drawable.ttbpt,"Trang thiết bị phương tiện"));
+        list.add(new ItemGrid(R.drawable.dcdm,"Đường cấm, đường một chiều"));
         list.add(new ItemGrid(R.drawable.ndc,"Nồng độ cồn, chất kích thích"));
         list.add(new ItemGrid(R.drawable.gtx,"Giấy tờ xe"));
-        list.add(new ItemGrid(R.drawable.dxdx,"Dừng xe, đỗ xe"));
-        list.add(new ItemGrid(R.drawable.chnd,"Chuyển hướng nhường đường"));
-        list.add(new ItemGrid(R.drawable.dcdm,"Đường cấm, đường một chiều"));
-        list.add(new ItemGrid(R.drawable.ttbpt,"Trang thiết bị phương tiện"));
         list.add(new ItemGrid(R.drawable.other,"Khác"));
         adapter = new ItemGridAdapter(this,list);
         gridView.setAdapter(adapter);
@@ -51,6 +51,7 @@ public class ResearchLawActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ResearchLawActivity.this,ListLawActivity.class);
+                intent.putExtra("type",i+1);
                 startActivity(intent);
             }
         });

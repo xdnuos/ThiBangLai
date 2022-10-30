@@ -9,10 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-import androidx.annotation.Nullable;
-
 import com.example.thibanglai.model.BienBao;
-import com.example.thibanglai.model.DA;
 import com.example.thibanglai.model.Exam;
 
 import java.io.File;
@@ -421,6 +418,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 return cursor.getInt(0);
             }while (cursor.moveToNext());
         } else return -1;
+    }
+    public void getLaw(){
+
     }
 }
 
